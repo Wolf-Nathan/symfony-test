@@ -3,35 +3,39 @@
 {% block title %}Ordonnance index{% endblock %}
 
 {% block body %}
-    <h1>Ordonnance index</h1>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="font-weight-light mb-4">Ordonnance index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NumeroOrdre</th>
-                <th>DateHeure</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ordonnance in ordonnances %}
-            <tr>
-                <td>{{ ordonnance.id }}</td>
-                <td>{{ ordonnance.numeroOrdre }}</td>
-                <td>{{ ordonnance.dateHeure ? ordonnance.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('ordonnance_show', {'id': ordonnance.id}) }}">show</a>
-                    <a href="{{ path('ordonnance_edit', {'id': ordonnance.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">NumeroOrdre</th>
+                    <th scope="col">DateHeure</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ordonnance in ordonnances %}
+                    <tr>
+                        <td>{{ ordonnance.id }}</td>
+                        <td>{{ ordonnance.numeroOrdre }}</td>
+                        <td>{{ ordonnance.dateHeure ? ordonnance.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('ordonnance_show', {'id': ordonnance.id}) }}">show</a>
+                            <a href="{{ path('ordonnance_edit', {'id': ordonnance.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="font-weight-light">Aucune ordonnance trouvée !</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <a href="{{ path('ordonnance_new') }}">Create new</a>
+            <a href="{{ path('ordonnance_new') }}">Create new</a>
+        </div>
+    </div>
 {% endblock %}
