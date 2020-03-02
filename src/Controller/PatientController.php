@@ -43,4 +43,18 @@ class PatientController extends AbstractController
             'controller_name' => 'Nouveau patient créé',
         ]);
     }
+
+    /**
+     * @Route("/patient/list", name="patient_list")
+     */
+    public function list(){
+        $patientRepository = $this->getDoctrine()->getManager()->getRepository(Patient::class);
+        $patients = $patientRepository->findAll();
+
+
+        return $this->render('patient/list.html.twig', [
+            'controller_name' => 'Liste des patients',
+            'patients' => $patients
+        ]);
+    }
 }
