@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LignePrescription{% endblock %}
+
+{% block body %}
+    <h1>LignePrescription</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_prescription.id }}</td>
+            </tr>
+            <tr>
+                <th>Posologie</th>
+                <td>{{ ligne_prescription.posologie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ligne_prescription_index') }}">back to list</a>
+
+    <a href="{{ path('ligne_prescription_edit', {'id': ligne_prescription.id}) }}">edit</a>
+
+    {{ include('ligne_prescription/_delete_form.html.twig') }}
+{% endblock %}
