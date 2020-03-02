@@ -3,41 +3,46 @@
 {% block title %}Patient index{% endblock %}
 
 {% block body %}
-    <h1>Patient index</h1>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="font-weight-light mb-4">Patient index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NumSS</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>DateNaissance</th>
-                <th>Sexe</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for patient in patients %}
-            <tr>
-                <td>{{ patient.id }}</td>
-                <td>{{ patient.NumSS }}</td>
-                <td>{{ patient.nom }}</td>
-                <td>{{ patient.prenom }}</td>
-                <td>{{ patient.dateNaissance ? patient.dateNaissance|date('Y-m-d') : '' }}</td>
-                <td>{{ patient.sexe }}</td>
-                <td>
-                    <a href="{{ path('patient_show', {'id': patient.id}) }}">show</a>
-                    <a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">NumSS</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">DateNaissance</th>
+                    <th scope="col">Sexe</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.id }}</td>
+                        <td>{{ patient.NumSS }}</td>
+                        <td>{{ patient.nom }}</td>
+                        <td>{{ patient.prenom }}</td>
+                        <td>{{ patient.dateNaissance ? patient.dateNaissance|date('Y-m-d') : '' }}</td>
+                        <td>{{ patient.sexe }}</td>
+                        <td>
+                            <a href="{{ path('patient_show', {'id': patient.id}) }}">show</a>
+                            <a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="font-weight-light">Aucun patient trouvé !</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <a href="{{ path('patient_new') }}">Create new</a>
+            <a href="{{ path('patient_new') }}">Create new</a>
+        </div>
+    </div>
+    {# Style is generously offer by Sckraa follow him on Github https://github.com/sckraa #}
 {% endblock %}
