@@ -3,33 +3,37 @@
 {% block title %}Consultation index{% endblock %}
 
 {% block body %}
-    <h1>Consultation index</h1>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="font-weight-light mb-4">Consultation index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>DateHeure</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for consultation in consultations %}
-            <tr>
-                <td>{{ consultation.id }}</td>
-                <td>{{ consultation.dateHeure ? consultation.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('consultation_show', {'id': consultation.id}) }}">show</a>
-                    <a href="{{ path('consultation_edit', {'id': consultation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <table class="thead-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">DateHeure</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for consultation in consultations %}
+                    <tr>
+                        <td>{{ consultation.id }}</td>
+                        <td>{{ consultation.dateHeure ? consultation.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('consultation_show', {'id': consultation.id}) }}">show</a>
+                            <a href="{{ path('consultation_edit', {'id': consultation.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="font-weight-light">Aucune consultation trouvée !</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <a href="{{ path('consultation_new') }}">Create new</a>
+            <a href="{{ path('consultation_new') }}">Create new</a>
+        </div>
+    </div>
 {% endblock %}
