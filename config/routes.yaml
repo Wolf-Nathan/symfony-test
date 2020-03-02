@@ -1,3 +1,15 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+consultation_list:
+    path: /consultation/
+    controller:  App\Controller\ConsultationController::index
+medecin_list:
+    path: /medecin/
+    controller:  App\Controller\MedecinController::index
+patient_list:
+    path: /patient/
+    controller:  App\Controller\PatientController::index
+medicament_list:
+    path: /medicament/
+    controller:  App\Controller\MedicamentController::index
