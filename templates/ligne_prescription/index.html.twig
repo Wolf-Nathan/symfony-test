@@ -3,33 +3,37 @@
 {% block title %}LignePrescription index{% endblock %}
 
 {% block body %}
-    <h1>LignePrescription index</h1>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="font-weight-light mb-4">LignePrescription index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Posologie</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ligne_prescription in ligne_prescriptions %}
-            <tr>
-                <td>{{ ligne_prescription.id }}</td>
-                <td>{{ ligne_prescription.posologie }}</td>
-                <td>
-                    <a href="{{ path('ligne_prescription_show', {'id': ligne_prescription.id}) }}">show</a>
-                    <a href="{{ path('ligne_prescription_edit', {'id': ligne_prescription.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Posologie</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ligne_prescription in ligne_prescriptions %}
+                    <tr>
+                        <td>{{ ligne_prescription.id }}</td>
+                        <td>{{ ligne_prescription.posologie }}</td>
+                        <td>
+                            <a href="{{ path('ligne_prescription_show', {'id': ligne_prescription.id}) }}">show</a>
+                            <a href="{{ path('ligne_prescription_edit', {'id': ligne_prescription.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="font-weight-light">Aucune ligne de prescription trouvée !</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <a href="{{ path('ligne_prescription_new') }}">Create new</a>
+            <a href="{{ path('ligne_prescription_new') }}">Create new</a>
+        </div>
+    </div>
 {% endblock %}
