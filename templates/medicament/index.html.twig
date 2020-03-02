@@ -3,35 +3,39 @@
 {% block title %}Medicament index{% endblock %}
 
 {% block body %}
-    <h1>Medicament index</h1>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="font-weight-light mb-4">Medicament index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Denomination</th>
-                <th>Conditionnement</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for medicament in medicaments %}
-            <tr>
-                <td>{{ medicament.id }}</td>
-                <td>{{ medicament.denomination }}</td>
-                <td>{{ medicament.conditionnement }}</td>
-                <td>
-                    <a href="{{ path('medicament_show', {'id': medicament.id}) }}">show</a>
-                    <a href="{{ path('medicament_edit', {'id': medicament.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Denomination</th>
+                    <th scope="col">Conditionnement</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for medicament in medicaments %}
+                    <tr>
+                        <td>{{ medicament.id }}</td>
+                        <td>{{ medicament.denomination }}</td>
+                        <td>{{ medicament.conditionnement }}</td>
+                        <td>
+                            <a href="{{ path('medicament_show', {'id': medicament.id}) }}">show</a>
+                            <a href="{{ path('medicament_edit', {'id': medicament.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="font-weight-light">Aucun médicament trouvé !</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <a href="{{ path('medicament_new') }}">Create new</a>
+            <a href="{{ path('medicament_new') }}">Create new</a>
+        </div>
+    </div>
 {% endblock %}
