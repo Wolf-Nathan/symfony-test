@@ -9,6 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+
+
 
 /**
  * @Route("/patient")
@@ -31,19 +38,27 @@ class PatientController extends AbstractController
     public function new(Request $request): Response
     {
         $patient = new Patient();
-        $form = $this->createForm(PatientType::class, $patient);
+        $form = $this->createFormBuilder($patient)
+            ->add('prenom', TextType::class)
+            ->add('nom', TextType::class)
+            ->add('NumSS', IntegerType::class)
+            ->add('dateNaissance', DateType::class)
+            ->add('save', SubmitType::class, ['label' => 'Création Patient'])
+            ->getForm();
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $patient = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($patient);
             $entityManager->flush();
 
-            return $this->redirectToRoute('patient_index');
+            return $this->redirectToRoute('patient_list');
         }
 
         return $this->render('patient/new.html.twig', [
-            'patient' => $patient,
             'form' => $form->createView(),
         ]);
     }
