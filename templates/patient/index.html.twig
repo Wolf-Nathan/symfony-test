@@ -16,6 +16,7 @@
                     <th scope="col">Prenom</th>
                     <th scope="col">DateNaissance</th>
                     <th scope="col">Sexe</th>
+                    <th scope="col">Mail</th>
                     <th scope="col">actions</th>
                 </tr>
                 </thead>
@@ -28,6 +29,7 @@
                         <td>{{ patient.prenom }}</td>
                         <td>{{ patient.dateNaissance ? patient.dateNaissance|date('Y-m-d') : '' }}</td>
                         <td>{{ patient.sexe }}</td>
+                        <td>{{ patient.mail }}</td>
                         <td>
                             <a href="{{ path('patient_show', {'id': patient.id}) }}">show</a>
                             <a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>

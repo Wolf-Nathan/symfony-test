@@ -53,6 +53,11 @@ class Patient
      */
     private $ordonnances;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $mail;
+
     public function __construct()
     {
         $this->consultations = new ArrayCollection();
@@ -188,5 +193,17 @@ class Patient
 
     public function __toString(){
         return $this->nom." ".$this->prenom.", numSS: ".$this->NumSS;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
     }
 }

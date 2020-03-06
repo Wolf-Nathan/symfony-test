@@ -43,6 +43,8 @@ class PatientController extends AbstractController
             ->add('nom', TextType::class)
             ->add('NumSS', IntegerType::class)
             ->add('dateNaissance', DateType::class)
+            ->add('sexe', TextType::class)
+            ->add('mail', TextType::class)
             ->add('save', SubmitType::class, ['label' => 'Création Patient'])
             ->getForm();
 
@@ -78,7 +80,15 @@ class PatientController extends AbstractController
      */
     public function edit(Request $request, Patient $patient): Response
     {
-        $form = $this->createForm(PatientType::class, $patient);
+        $form = $this->createFormBuilder($patient)
+            ->add('prenom', TextType::class)
+            ->add('nom', TextType::class)
+            ->add('NumSS', IntegerType::class)
+            ->add('dateNaissance', DateType::class)
+            ->add('sexe', TextType::class)
+            ->add('mail', TextType::class)
+            ->add('save', SubmitType::class, ['label' => 'Mettre à jour le Patient'])
+            ->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
