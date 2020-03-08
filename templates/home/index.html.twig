@@ -2,6 +2,7 @@
 {% if is_granted('ROLE_ADMIN') %}
     <h3>Vous êtes connecté en tant qu'administrateur.</h3>
 {% endif %}
+<h3> Bonjour {{ app.user.username }} - {{ app.user.email }}</h3>
 <ul>
     <li>
         <a href="{{ path('consultation_list') }}">Consultations</a>

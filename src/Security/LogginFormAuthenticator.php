@@ -103,4 +103,21 @@ class LogginFormAuthenticator extends AbstractFormLoginAuthenticator implements 
     {
         return $this->urlGenerator->generate('app_login');
     }
+
+    /*public function getUserConnect(){
+        //On récupère le service
+        $security = $this->container->get('security.token_storage');
+
+        //On récupère le token
+        $token = $security->getToken();
+
+        //Si la requête courant n'est pas derrière un pare-feu, $token est null
+        if($token){
+            $user =$token->getUser();
+            //Si l'utilisateur courant est anonyme, $user vaut 'anon.'.
+            if(!($user.equals('anon.'))){
+                $user->getUsername();
+            }
+        }
+    }*/
 }
