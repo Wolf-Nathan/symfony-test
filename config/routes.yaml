@@ -13,3 +13,6 @@ patient_list:
 medicament_list:
     path: /medicament/
     controller:  App\Controller\MedicamentController::index
+app_logout:
+    path: /logout
+    methods: GET

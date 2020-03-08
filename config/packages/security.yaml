@@ -21,6 +21,9 @@ security:
                     - App\Security\LogginFormAuthenticator
             logout:
                 path: app_logout
+                target: accueil
+            form_login:
+                check_path: app_login
                 # where to redirect after logout
                 # target: app_any_route
             #provider: users_in_memory
@@ -31,8 +34,19 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # matches /admin/users/*
+        - { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
+
+        # matches /admin/* except for anything matching the above rule
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+
+    role_hierarchy:
+        # Un admin hérite des droits d'auteur et de modérateur
+        ROLE_ADMIN: [ROLE_AUTEUR, ROLE_MODERATEUR]
+        # On garde ce rôle superadmin, il nous resservira par la suite
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
