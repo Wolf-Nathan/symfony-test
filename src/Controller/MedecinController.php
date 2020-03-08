@@ -15,6 +15,30 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MedecinController extends AbstractController
 {
+    const MOIS = array(
+        '1' => 'janvier',
+        '2' => 'février',
+        '3' => 'mars',
+        '4' => 'avril',
+        '5' => 'mai',
+        '6' => 'juin',
+        '7' => 'juillet',
+        '8' => 'août',
+        '9' => 'septembre',
+        '10' => 'octobre',
+        '11' => 'novembre',
+        '12' => 'décembre',
+        '01' => 'janvier',
+        '02' => 'février',
+        '03' => 'mars',
+        '04' => 'avril',
+        '05' => 'mai',
+        '06' => 'juin',
+        '07' => 'juillet',
+        '08' => 'août',
+        '09' => 'septembre',
+    );
+
     /**
      * @Route("/", name="medecin_index", methods={"GET"})
      */
@@ -93,20 +117,35 @@ class MedecinController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/consultation", name="medecin_consultation", methods={"GET"})
+     * @Route("/{id}/consultation/{month}/{year}", name="medecin_consultation", methods={"GET"})
      */
     public function consultation(Request $request, Medecin $medecin): Response
     {
+        $month = $request->get('month');
+        $year = $request->get('year');
+        if(isset($_POST['dateConsult'])){
+            $dateConsult = $_POST['dateConsult'];
+            $separe = explode('-', $dateConsult);
+            $month = $separe[1];
+            $year  = $separe[0];
+        }
         $consultations = $medecin->getConsultations();
         $consulInfo = [];
         foreach($consultations as $consultation){
-            $id = $consultation->getId();
-            $consulInfo[$id]['patient'] = $consultation->getPatient()->__toString();
-            $consulInfo[$id]['date'] = $consultation->getDateHeure()->format('d/m/Y H:i');
+            $consulMonth = $consultation->getDateHeure()->format('m');
+            $consulYear = $consultation->getDateHeure()->format('Y');
+            if(($consulMonth == $month && $consulYear == $year) || !($month || $year)) {
+                $id = $consultation->getId();
+                $consulInfo[$id]['patient'] = $consultation->getPatient()->__toString();
+                $consulInfo[$id]['date'] = $consultation->getDateHeure()->format('d/m/Y H:i');
+            }
         }
         return $this->render('medecin/consultation.html.twig', [
             'medecin' => $medecin,
-            'consultations' => $consulInfo
+            'consultations' => $consulInfo,
+            'month' => $month,
+            'year' => $year,
+            'mois' => self::MOIS
         ]);
     }
 }

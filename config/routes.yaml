@@ -10,6 +10,9 @@ medecin_list:
 medecin_consultation:
     path: /medecin/{id}/consultation
     controller: App\Controller\MedecinController::consultation
+medecin_consultation_month:
+    path: /medecin/{id}/consultation/{month}/{year}
+    controller: App\Controller\MedecinController::consultation
 patient_list:
     path: /patient/
     controller:  App\Controller\PatientController::index

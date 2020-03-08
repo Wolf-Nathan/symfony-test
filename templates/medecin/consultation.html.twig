@@ -6,6 +6,15 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="font-weight-light mb-4">Liste des consultations du médecin {{ medecin.nom }}, matricule {{ medecin.matricule }}</h1>
+            <form method="post">
+                <input type="date" name="dateConsult">
+                <button type="submit">Consultations du mois</button>
+            </form>
+            {% if month %}
+                <h3>Consultations du mois de {{ mois[month] }} de l'année {{ year }}</h3>
+                <a href="{{ path('medecin_consultation_month', {'id': medecin.id, 'month': month-1, 'year': year}) }}">Mois précédent</a>
+                <a href="{{ path('medecin_consultation_month', {'id': medecin.id, 'month': month+1, 'year': year}) }}">Mois suivant</a>
+            {% endif %}
             <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr>
