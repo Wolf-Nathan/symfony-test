@@ -2,7 +2,12 @@
 {% if is_granted('ROLE_ADMIN') %}
     <h3>Vous êtes connecté en tant qu'administrateur.</h3>
 {% endif %}
-<h3> Bonjour {{ app.user.name }} - {{ app.user.email }}</h3>
+{% if app.user %}
+    <h3> Bonjour {{ app.user.name }} - {{ app.user.email }}</h3>
+    <h6><a href="{{ path('app_logout') }}">Se déconnecter</a> </h6>
+{% else %}
+    <h5><a href="{{ path('app_login') }}">Se connecter</a></h5>
+{% endif %}
 <ul>
     <li>
         <a href="{{ path('consultation_list') }}">Consultations</a>
@@ -16,4 +21,9 @@
     <li>
         <a href="{{ path('medicament_list') }}">Médicaments</a>
     </li>
+    {% if is_granted('ROLE_ADMIN') %}
+        <li>
+            <a href="{{ path('users_list') }}">Utilisateurs</a>
+        </li>
+    {% endif %}
 </ul>

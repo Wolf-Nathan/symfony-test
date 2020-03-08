@@ -21,7 +21,7 @@ security:
                     - App\Security\LogginFormAuthenticator
             logout:
                 path: app_logout
-                target: accueil
+                target: index
             form_login:
                 check_path: app_login
                 # where to redirect after logout
@@ -39,10 +39,12 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # matches /admin/users/*
-        - { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
+        #- { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
 
         # matches /admin/* except for anything matching the above rule
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/users, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
     role_hierarchy:
