@@ -14,6 +14,7 @@
                     <th scope="col">Matricule</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
+                    <th scope="col">Consultations</th>
                     <th scope="col">actions</th>
                 </tr>
                 </thead>
@@ -24,6 +25,7 @@
                         <td>{{ medecin.matricule }}</td>
                         <td>{{ medecin.nom }}</td>
                         <td>{{ medecin.prenom }}</td>
+                        <td><a href="{{  path('medecin_consultation', {'id': medecin.id}) }}">Voir les consultations</a></td>
                         <td>
                             <a href="{{ path('medecin_show', {'id': medecin.id}) }}">show</a>
                             <a href="{{ path('medecin_edit', {'id': medecin.id}) }}">edit</a>
@@ -31,7 +33,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5" class="font-weight-light">Aucun médecin trouvé !</td>
+                        <td colspan="6" class="font-weight-light">Aucun médecin trouvé !</td>
                     </tr>
                 {% endfor %}
                 </tbody>

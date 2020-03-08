@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des consultations{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="font-weight-light mb-4">Liste des consultations du médecin {{ medecin.nom }}, matricule {{ medecin.matricule }}</h1>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id de consultation</th>
+                    <th scope="col">Patient</th>
+                    <th scope="col">Date et Heure</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, consultation in consultations %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ consultation.patient }}</td>
+                        <td>{{ consultation.date }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="font-weight-light">Aucune consultation trouvée !</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('medecin_index') }}">Retourner à la liste des médecins</a>
+        </div>
+    </div>
+{% endblock %}

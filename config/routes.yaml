@@ -7,6 +7,9 @@ consultation_list:
 medecin_list:
     path: /medecin/
     controller:  App\Controller\MedecinController::index
+medecin_consultation:
+    path: /medecin/{id}/consultation
+    controller: App\Controller\MedecinController::consultation
 patient_list:
     path: /patient/
     controller:  App\Controller\PatientController::index

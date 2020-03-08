@@ -91,4 +91,22 @@ class MedecinController extends AbstractController
 
         return $this->redirectToRoute('medecin_index');
     }
+
+    /**
+     * @Route("/{id}/consultation", name="medecin_consultation", methods={"GET"})
+     */
+    public function consultation(Request $request, Medecin $medecin): Response
+    {
+        $consultations = $medecin->getConsultations();
+        $consulInfo = [];
+        foreach($consultations as $consultation){
+            $id = $consultation->getId();
+            $consulInfo[$id]['patient'] = $consultation->getPatient()->__toString();
+            $consulInfo[$id]['date'] = $consultation->getDateHeure()->format('d/m/Y H:i');
+        }
+        return $this->render('medecin/consultation.html.twig', [
+            'medecin' => $medecin,
+            'consultations' => $consulInfo
+        ]);
+    }
 }
